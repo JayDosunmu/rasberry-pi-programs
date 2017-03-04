@@ -1,3 +1,4 @@
+import smbus
 import time
 import math
 
@@ -22,18 +23,15 @@ class MCPSensor:
 
 
 class HeartbeatSensor(MCPSensor):
-    def __init__(self, channel):
-        super('MCPSensor', self).__init__(channel)
+    pass
     
 
 class TempSensor(MCPSensor):
-    def __init__(self, channel):
-        super('MCPSensor', self).__init__(channel)
+    pass
 
 
 class FlexSensor(MCPSensor):
-    def __init__(self, channel):
-        super('MCPSensor', self).__init__(channel)
+    pass
 
 
 class AccelSensor:

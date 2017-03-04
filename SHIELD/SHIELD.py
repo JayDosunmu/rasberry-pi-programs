@@ -1,6 +1,7 @@
 import pyrebase
 import time
 import sensor_api
+import os
 
 period = 0.02
 config = {
@@ -13,10 +14,10 @@ config = {
 fb = pyrebase.initialize_app(config)
 db = fb.database()
 
-heart = HeartBeatSensor(1)
-temp = TempSensor(2)
-flex = FlexSensor(3)
-acc = AccelSensor(0x1D)
+heart = sensor_api.HeartbeatSensor(1)
+temp = sensor_api.TempSensor(2)
+flex = sensor_api.FlexSensor(3)
+acc = sensor_api.AccelSensor(0x1D)
 
 seconds = 0
 
@@ -29,7 +30,7 @@ try:
                     'z':acc.getValueX(),
                     'theta':acc.getTheta(),
                     'psi':acc.getPsi(),
-                    'orientation':acc.orientation()
+                    'orientation':acc.getOrientation()
                 },
             'heartbeat':{
                     'raw':heart.readRaw(),
@@ -42,7 +43,10 @@ try:
                 }
             }
         if seconds > 1:
-            db.child('live').push(data)
+            #db.child('live').push(data)
+            os.system('clear')
+            print(data)
+            
             seconds = 0
 
         seconds += period
