@@ -30,9 +30,9 @@ try:
         x = mma.getValueX()
         y = mma.getValueY()
         z = mma.getValueZ()
-        x2 = ((x + 235) % 256) - 128
-        y2 = ((y + 210) % 256) - 128
-        z2 = ((z + 120) % 256) - 128
+        x2 = ((x + 237) % 256) - 128
+        y2 = ((y + 230) % 256) - 128
+        z2 = ((z + 123) % 256) - 128
         mag = int(math.sqrt(x2*x2 + y2*y2 + z2*z2))
         vertangle = 180/3.142 * math.atan2(x2, math.sqrt(y2*y2 + z2*z2))
         print('x: ',x,', x2: ',x2)
