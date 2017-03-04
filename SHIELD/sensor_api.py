@@ -5,10 +5,12 @@ import math
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
+
 SPI_PORT = 0
 SPI_DEVICE = 0
 
 mcp = Adafruit_MCP3008.MCP3008(spi = SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
 
 class MCPSensor:
     def __init__(self, channel):
@@ -18,20 +20,41 @@ class MCPSensor:
     def readRaw(self):
         return mcp.read_adc(self.channel)
 
+    def processRaw(self):
+        pass
+    
     def getPeriod(self):
         return self.period
 
 
 class HeartbeatSensor(MCPSensor):
-    pass
-    
+    alpha = 0.75
+    def __init__(self, channel):
+        super().__init__()
+        self.new_timestamp = time.time()
+        self.old_timestamp = new_timestamp
+
+    def getBPM(self):
+        return
+
+    def update(self):
+        self.new_timestamp = time.time()
+
 
 class TempSensor(MCPSensor):
-    pass
+    def processRaw(self):
+        return (self.readRaw * 5.0)/1024.0
+    
+    def getCelcius(self):
+        return (self.processRaw() - 0.5) * 100
+
+    def getFahrenheit(self):
+        return (self.getCelcius() * 9.0/5.0) + 32.0
 
 
 class FlexSensor(MCPSensor):
-    pass
+    def getAngle(self):
+        pass
 
 
 class AccelSensor:

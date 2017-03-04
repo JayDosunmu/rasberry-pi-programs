@@ -36,10 +36,11 @@ try:
                     'raw':heart.readRaw(),
                 },
             'flex':{
-                    'raw':heart.readRaw(),
+                    'raw':flex.readRaw(),
                 },
             'temp':{
-                    'raw':heart.readRaw(),
+                    'C':temp.getCelcius(),
+                    'F':temp.getFahrenheit(),
                 }
             }
         if seconds > 1:
