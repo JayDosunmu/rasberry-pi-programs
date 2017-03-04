@@ -22,15 +22,18 @@ class MCPSensor:
 
 
 class HeartbeatSensor(MCPSensor):
-    pass
-
+    def __init__(self, channel):
+        super('MCPSensor', self).__init__(channel)
+    
 
 class TempSensor(MCPSensor):
-    pass
+    def __init__(self, channel):
+        super('MCPSensor', self).__init__(channel)
 
 
 class FlexSensor(MCPSensor):
-    pass
+    def __init__(self, channel):
+        super('MCPSensor', self).__init__(channel)
 
 
 class AccelSensor:
