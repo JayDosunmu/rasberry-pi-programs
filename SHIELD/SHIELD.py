@@ -33,7 +33,8 @@ try:
                     'orientation':acc.getOrientation()
                 },
             'heartbeat':{
-                    'raw':heart.readRaw(),
+                    'change':heart.getChange(),
+                    'bpm':0,
                 },
             'flex':{
                     'intensity':flex.getIntensity(),

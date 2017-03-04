@@ -33,12 +33,21 @@ class HeartbeatSensor(MCPSensor):
         super().__init__(channel)
         self.new_timestamp = time.time()
         self.old_timestamp = self.new_timestamp
+        self.oldValue = 0
+        self.oldChange = 0
+        self.change = 0
 
     def getBPM(self):
         return
 
+    def getChange(self):
+        return self.change
+
     def update(self):
         self.new_timestamp = time.time()
+        rawValue = self.readRaw()
+        newValue = alpha * self.oldValue + (1-alpha)*rawValue
+        self.change = newValue - oldValue
 
 
 class TempSensor(MCPSensor):
