@@ -30,9 +30,9 @@ class MCPSensor:
 class HeartbeatSensor(MCPSensor):
     alpha = 0.75
     def __init__(self, channel):
-        super().__init__()
+        super().__init__(channel)
         self.new_timestamp = time.time()
-        self.old_timestamp = new_timestamp
+        self.old_timestamp = self.new_timestamp
 
     def getBPM(self):
         return
@@ -43,7 +43,7 @@ class HeartbeatSensor(MCPSensor):
 
 class TempSensor(MCPSensor):
     def processRaw(self):
-        return (self.readRaw * 5.0)/1024.0
+        return (self.readRaw()/1024.0)
     
     def getCelcius(self):
         return (self.processRaw() - 0.5) * 100
@@ -53,9 +53,14 @@ class TempSensor(MCPSensor):
 
 
 class FlexSensor(MCPSensor):
-    def getAngle(self):
-        pass
-
+    def getIntensity(self):
+        def translate(value, oldMin, oldMax, newMin, newMax):
+            oldRange = oldMax - oldMin
+            newRange = newMax - newMin
+            newValue = (((value - oldMin) * newRange)/oldRange) + newMin
+            return newValue
+        return translate(self.readRaw(), 530, 850, 0, 255)
+        
 
 class AccelSensor:
     bus = smbus.SMBus(1)

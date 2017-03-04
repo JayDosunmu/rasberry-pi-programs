@@ -14,9 +14,9 @@ config = {
 fb = pyrebase.initialize_app(config)
 db = fb.database()
 
-heart = sensor_api.HeartbeatSensor(1)
-temp = sensor_api.TempSensor(2)
-flex = sensor_api.FlexSensor(3)
+heart = sensor_api.HeartbeatSensor(0)
+temp = sensor_api.TempSensor(1)
+flex = sensor_api.FlexSensor(2)
 acc = sensor_api.AccelSensor(0x1D)
 
 seconds = 0
@@ -36,7 +36,7 @@ try:
                     'raw':heart.readRaw(),
                 },
             'flex':{
-                    'raw':flex.readRaw(),
+                    'intensity':flex.getIntensity(),
                 },
             'temp':{
                     'C':temp.getCelcius(),
