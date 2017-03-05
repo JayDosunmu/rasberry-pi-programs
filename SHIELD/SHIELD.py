@@ -44,13 +44,15 @@ try:
                     'F':temp.getFahrenheit(),
                 }
             }
-        if seconds > 1:
-            #db.child('live').push(data)
+        if seconds > 0.02:
+            db.child('live').update(data)
+            db.child('snapshots').push(data)
             os.system('clear')
-            print(data)
+            print("-"*59)
+            print(data['heartbeat']['change'])
             
             seconds = 0
-
+        heart.update()
         seconds += period
         time.sleep(period)
 
